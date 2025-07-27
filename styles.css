@@ -1,0 +1,172 @@
+* Custom Styles extending Tailwind */
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #EAEAEA;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    background-color: #121212;
+}
+
+/* Custom orange color from the logo */
+:root {
+    --brand-orange: #FF4F00;
+}
+
+.bg-brand-orange { background-color: var(--brand-orange); }
+.text-brand-orange { color: var(--brand-orange); }
+.border-brand-orange { border-color: var(--brand-orange); }
+
+/* Hero and Contact section gradient styles */
+#hero, #contact {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+#hero::before, #contact::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    padding-top: 150%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(255, 79, 0, 0.25), transparent 70%);
+    animation: pulse-fade 10s ease-in-out infinite;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+@keyframes pulse-fade {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.25;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.1;
+    }
+}
+
+/* Subtle gradient for other sections */
+#services, #ai-plan-finder, #work, #intro-video-section, #pricing, #faq {
+    background-color: rgba(0,0,0,0.2);
+    background-image: linear-gradient(90deg, transparent, rgba(255, 79, 0, 0.05), transparent);
+}
+
+
+/* Scroll-in animation setup */
+.reveal {
+    position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Client logo scroll animation */
+.logos-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+}
+
+.logos-slide {
+    display: flex;
+    animation: 30s slide infinite linear;
+}
+
+.logos-slide img {
+    height: 36px;
+    margin: 0 40px;
+    filter: grayscale(1) brightness(1.5);
+    opacity: 0.6;
+    transition: all 0.3s;
+}
+.logos-slide:hover img {
+     filter: grayscale(0) brightness(1);
+     opacity: 1;
+}
+
+@keyframes slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Custom styles for FAQ accordion */
+details > summary {
+    list-style: none;
+}
+details > summary::-webkit-details-marker {
+    display: none;
+}
+details summary:after {
+    content: '+';
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+}
+details[open] summary:after {
+    transform: rotate(45deg);
+}
+
+/* Loading spinner */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid var(--brand-orange);
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Styles for the new Work marquee */
+.work-marquee-container {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+}
+.work-marquee-track {
+    display: flex;
+    gap: 1rem;
+    animation: work-scroll 60s linear infinite;
+}
+.work-marquee-track > div {
+    flex-shrink: 0;
+    width: 200px; /* Controls the width of the vertical items */
+}
+@keyframes work-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Text glow effect */
+.text-glow {
+    text-shadow: 0 0 8px rgba(255, 79, 0, 0.3);
+}
+
+/* Scrolled header style */
+#main-header.scrolled {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom-width: 1px;
+    border-color: rgb(31 41 55);
+}
